@@ -1,0 +1,46 @@
+
+{% extends 'shop/base.html' %}
+
+
+{% block content %}
+
+<br>
+<div class="card mb-4" style="max-width: 1000px;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{ object.thumbnail.url }}" class="card-img">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h4 class="card-title">{{ object.title }}</h4>
+          <p class="card-text">نویسنده: {{ object.book_author }}</p>
+          <div>
+            {% for cat in book.category.active %}
+                <a href="{% url 'shop:category' cat.slug %}">#{{cat.title}}</a>
+            {% endfor %}
+          </div>
+          <hr>
+          <p class="card-text">{{ object.description|striptags}}</p>
+          {% if book.is_free is True %}
+                <li class="btn btn-success">رایگان</li>
+                {% else %}
+                <li class="btn btn-danger">تومان{{ book.price|floatformat:2 }}</li>
+        {% endif %}<br><br>
+        {% if object.book_available is True %}
+          <a href="#" class="btn btn-primary btn-lg btn-block" role="button">ثبت سفارش</a>
+        {% else %}
+          <h4 class="text-danger">ناموجود</h4>
+        {% endif %}
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- <p>Follow Author: </p> -->
+
+
+
+
+{% endblock content %}
+

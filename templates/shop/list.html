@@ -1,0 +1,47 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+
+
+<hr>
+
+<div class="container">
+<div class="row">
+    {% for book in object_list %}
+    <div class="col">
+        <div class="card" style="width: 13rem;">
+            <img src="{{ book.thumbnail.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title|slice:":25"}}</h5>
+                <a class="text-danger">نویسنده:{{ book.book_author|slice:":25"}}<a>
+                <div>
+                    {% for cat in book.category.active %}
+                        <a href="{% url 'shop:category' cat.slug %}">#{{cat.title}}</a>
+                    {% endfor %}
+                </div>
+                <p class="card-text">{{ book.description|striptags|truncatewords:20}}</p>      
+                <div class="col" >        
+                    {% if book.book_available is True %}
+                    <span class="btn btn-secondary">موجود</span>
+                    {% else %}
+                    <span class="btn btn-secondary">ناموجود</span>
+                    {% endif %}<br>
+                    <br>
+                    {% if book.is_free is True %}
+                    <span class="btn btn-success">رایگان</span>
+                    {% else %}
+                    <span class="btn btn-danger">تومان{{ book.price|floatformat:2 }}</span>
+                    {% endif %}<br>
+                </div>  
+                <br>
+                <a href="{% url 'shop:detail' book.id %}" class="btn btn-primary">  جزئیات و ثبت سفارش</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}
+

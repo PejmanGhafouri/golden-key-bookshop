@@ -1,0 +1,119 @@
+{% load static %}
+{% load base_tags %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+  <link href="{% static 'shop/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="{% static 'shop/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'shop/css/rtl.css' %}" rel="stylesheet">
+  
+  <title>فروشگاه کتاب کلید طلایی</title>
+
+ 
+</head>
+
+<body>
+  <!--Nav Bar-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="{%url 'shop:home'%}"> فروشگاه کتاب کلید طلایی</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      {% category_navbar %}
+      {% if user.is_authenticated %}
+          <ul class="navbar-nav mr-auto-navbav">
+            <li class="nav-item">
+              <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="{% url 'logout' %}">
+                خروج
+                <i class="fas fa-sign-in-alt"></i>
+              </a>
+            </li>
+          </ul>
+          {% else %}
+          <ul class="navbar-nav mr-auto-navbav">
+            <li class="nav-item">
+              <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="{% url 'login' %}">
+                ورود
+                <i class="fas fa-sign-in-alt"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="{% url 'register' %}">
+                ثبت نام
+                <i class="fas fa-user-plus"></i>
+              </a>
+            </li>
+          </ul>
+      {% endif %}
+</div>
+    </div>
+  </nav>
+
+    <!-- search css -->
+  </nav><br>
+  {% block header %}
+
+  {% endblock %}
+
+
+  <div class='container'>
+    <div class='row'>
+      <div class="col-mb-4">
+
+
+    {% block content %}
+
+
+    {% endblock content %}
+    <hr>
+    {% if is_paginated %}
+    <div class="clearfix pager-botton">
+      {% if page_obj.has_previous %}
+        <a class="btn btn-primary " href="{% block previous_page_url %}{% endblock %}">پست های جدید &rarr;</a>
+      {% endif %}
+      {% if page_obj.has_next %}
+        <a class="btn btn-primary" href="{% block next_page_url %}{% endblock %}">پست های قدیمی &larr;</a>
+      {% endif %}
+
+    </div>  
+
+  </div>
+
+</div>
+
+  </div>
+{% endif %}
+<br>
+	<!-- footer -->
+  <footer class="alert alert-dark text-center">
+    <strong>فروشگاه کتاب کلید طلایی</strong>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
